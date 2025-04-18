@@ -1,0 +1,356 @@
+:root {
+    --bg: #f5f7fa;
+    --card-bg: #ffffff;
+    --text: #1a1a1a;
+    --accent: #5A67D8;
+    --accent-hover: #4C51BF;
+    --shadow: rgba(0, 0, 0, 0.08);
+    --heading: 1.5rem;
+    --body: 1rem;
+    --spacing-unit: 1.5rem;
+    --radius: 16px;
+    --transition: 0.3s ease;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html.dark {
+  --bg: #18181b;
+  --card-bg: #24242b;
+  --text: #e4e4e7;
+  --accent: #8b5cf6;
+  --shadow: rgba(0, 0, 0, 0.7);
+  --link: #9ca3af;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    transition: background 0.4s ease;
+    -webkit-font-smoothing: antialiased;
+}
+a {
+    color: var(--accent);
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+
+/* Skip link for screen readers */
+.skip-link {
+    position: absolute;
+    left: -999px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+.skip-link:focus {
+    left: 10px;
+    top: 10px;
+    width: auto;
+    height: auto;
+    padding: 8px 12px;
+    background: var(--accent);
+    color: #fff;
+    z-index: 1000;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text);
+    transition: transform 0.3s;
+}
+.theme-toggle:hover {
+    transform: rotate(20deg);
+    background: var(--card-bg);
+    border-radius: 50%;
+    padding: 0.5rem;
+    box-shadow: 0 2px 6px var(--shadow);
+}
+
+/* 3) Layout */
+.container {
+    max-width: 1200px;
+    margin: calc(var(--spacing-unit) * 3) auto;
+    padding: 0 calc(var(--spacing-unit) * 2);
+    padding-block: calc(var(--spacing-unit) * 2);
+}
+h1 {
+    font-size: calc(var(--heading) * 1.4);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: var(--spacing-unit);
+    margin-top: var(--spacing-unit);
+}
+h2 {
+    font-size: var(--heading);
+    font-weight: 600;
+    margin-bottom: calc(var(--spacing-unit) * 0.75);
+    margin-top: var(--spacing-unit);
+}
+
+/* 4) Card sections */
+.section-card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 10px var(--shadow);
+    padding: calc(var(--spacing-unit) * 3);
+    margin-bottom: calc(var(--spacing-unit) * 3);
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+.section-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px var(--shadow);
+}
+
+/* 5) Responsive two‑column grid for recipe page */
+@media (min-width: 768px) {
+}
+
+/* 6) Checklist styling */
+.checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.checklist li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: calc(var(--spacing-unit) * 2);
+}
+.checklist input[type="checkbox"] {
+    flex-shrink: 0;
+    width: 1.3rem;
+    height: 1.3rem;
+    margin-right: 0.75rem;
+    cursor: pointer;
+    accent-color: var(--accent);
+}
+.checklist input[type="checkbox"]:hover {
+    transform: scale(1.1);
+}
+.checklist label {
+    flex: 1;
+    cursor: pointer;
+    font-size: var(--body);
+}
+
+/* 7) Source link */
+.source-link {
+    display: block;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+/* 8) Footer spacing */
+.footer {
+    text-align: center;
+    padding: 2rem 0;
+    font-size: 0.8rem;
+    opacity: 0.6;
+}
+
+/* Form on index.html */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+input[type="url"] {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0.5rem;
+    background: var(--card-bg);
+    box-shadow: inset 0 1px 3px var(--shadow);
+    width: 100%;
+}
+input[type="url"]:focus {
+    border-bottom-color: var(--accent);
+    box-shadow: none;
+}
+
+button[type="submit"] {
+    background: var(--accent);
+    background-size: 200% 200%;
+    border: none;
+    border-radius: var(--radius);
+    padding: 1rem 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: background-position var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+button[type="submit"]:hover {
+    background: var(--accent-hover);
+    background-position: 100% 0;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+}
+
+.action-button {
+    background: var(--accent);
+    background-size: 200% 200%;
+    border: none;
+    border-radius: var(--radius);
+    padding: 1rem 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: background-position var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+.action-button:hover {
+    background: var(--accent-hover);
+    background-position: 100% 0;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+}
+.action-button:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* History section */
+.history-section {
+  margin-top: 2rem;
+}
+.history-section h2 {
+  font-size: var(--heading);
+  margin-bottom: 1rem;
+}
+.history-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+}
+.history-list li {
+  margin-bottom: 0.5rem;
+}
+.history-link {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: var(--body);
+  color: var(--accent);
+  cursor: pointer;
+  text-decoration: underline;
+  transition: opacity 0.2s;
+}
+.history-link:hover {
+  opacity: 0.7;
+}
+html.dark input[type="url"] {
+  background: var(--card-bg);
+  color: var(--text);
+  border-bottom-color: #555;
+}
+html.dark input[type="url"]::placeholder {
+  color: #c4c4c6;
+}
+html.dark input[type="url"],
+html.dark input,
+html.dark textarea {
+  color: var(--text);
+}
+a, .history-link, .source-link, input, textarea, button {
+  color: var(--text);
+}
+a:hover, .history-link:hover, button:hover {
+  color: var(--card-bg);
+}
+.source-link a,
+.history-link {
+  color: var(--accent);
+}
+.source-link a:hover,
+.history-link:hover {
+  color: var(--bg);
+}
+
+.intro-text {
+    margin-bottom: calc(var(--spacing-unit) * 1.5);
+}
+.source-link {
+    margin-bottom: calc(var(--spacing-unit) * 2);
+}
+.progress-container {
+    margin-bottom: calc(var(--spacing-unit) * 2);
+}
+
+/* Speech buttons */
+#read-all-steps, .speak-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  margin-left: 0.5rem;
+  color: var(--accent);
+  transition: color 0.3s;
+}
+#read-all-steps:hover, .speak-btn:hover {
+  color: var(--bg);
+  text-shadow: 0 0 8px var(--accent);
+}
+#read-all-steps {
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+.stop-btn {
+       margin-left: 0.5rem;
+}
+
+/* Modern typography tweaks */
+h1, h2 {
+  letter-spacing: 1px;
+}
+p {
+  opacity: 0.9;
+}
+
+/* Ingredient actions layout */
+.ingredient-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--spacing-unit) * 0.75);
+  margin-bottom: var(--spacing-unit);
+  align-items: center;
+}
+
+/* Remove extra margins on buttons inside ingredient-actions */
+.ingredient-actions button {
+  margin: 0;
+}
+
+/* Servings slider */
+.servings-control {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: var(--spacing-unit);
+}
+.servings-control input[type="range"] {
+  flex: 1;
+}
+.servings-control label {
+  font-weight: 500;
+  white-space: nowrap;
+}

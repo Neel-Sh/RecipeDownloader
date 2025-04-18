@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+  <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+  <main id="main-content" class="container">
+    <div id="recipe-meta" data-url="{{ url }}"></div>
+    <section class="section-card form-section" role="region" aria-labelledby="header-heading">
+      <h1 id="header-heading">Recipe To‑Do</h1>
+      <p class="intro-text">Paste a recipe URL to generate your cooking checklist.</p>
+      <p class="source-link"><a href="{{ url }}" target="_blank" rel="noopener">Original Source</a></p>
+      <section id="ingredients-section" class="section-card" role="region" aria-labelledby="ingr-heading">
+          <h2 id="ingr-heading">Ingredients</h2>
+          <div class="progress-container" role="region" aria-labelledby="ingr-progress-label">
+            <div id="ingr-progress-label" class="progress-label">
+              Ingredients: <span id="ingredients-completed">0</span>/<span id="ingredients-total">{{ ingredients|length }}</span>
+            </div>
+            <div class="progress-bar">
+              <div id="ingredients-progress" class="progress-filled"></div>
+            </div>
+          </div>
+          <div class="servings-control">
+            <label for="servings-range">Servings: <span id="servings-count">1</span></label>
+            <input type="range" id="servings-range" min="1" max="12" value="1" step="0.5">
+          </div>
+          <div class="ingredient-actions" aria-label="Ingredient actions">
+            <button id="copy-ingredients" class="action-button" type="button">Copy Ingredients</button>
+            <button id="download-ingredients" class="action-button" type="button">Download Ingredients</button>
+        </div>
+        <button id="clear-progress" class="action-button" type="button">Clear Progress</button>
+          <ul class="checklist">
+            {% for item in ingredients %}
+              <li><label><input type="checkbox"><span class="ingredient-text"> {{ item }}</span></label></li>
+            {% endfor %}
+          </ul>
+        </section>
+        <section id="steps-section" class="section-card" role="region" aria-labelledby="steps-heading">
+          <h2 id="steps-heading">Steps</h2>
+          <div class="progress-container" role="region" aria-labelledby="progress-label">
+            <div id="progress-label" class="progress-label">
+              Steps: <span id="steps-completed">0</span>/<span id="steps-total">{{ steps|length }}</span>
+            </div>
+            <div class="progress-bar">
+              <div id="steps-progress" class="progress-filled"></div>
+            </div>
+          </div>
+          <button id="read-all-steps" class="action-button read-btn" type="button" aria-label="Read all steps">🔊 Read All</button>
+          <button id="stop-reading" class="action-button stop-btn" type="button" aria-label="Stop reading">⏹️ Stop</button>
+          <ol class="checklist">
+          {% for step in steps %}
+            <li>
+              <label>
+                <input type="checkbox">
+                <span class="step-text">{{ step }}</span>
+              </label>
+              <button class="speak-btn" type="button" aria-label="Read this step">🔊</button>
+            </li>
+          {% endfor %}
+          </ol>
+        </section>
+    </section>
+    <p><a href="{{ url_for('index') }}">&larr; Paste another recipe</a></p>
+    <section class="section-card history-section" role="region" aria-labelledby="history-heading">
+      <h2 id="history-heading">Recent Recipes</h2>
+      <ul id="recent-list" class="history-list"></ul>
+      <button id="clear-history" class="action-button" type="button">Clear History</button>
+    </section>
+  </main>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

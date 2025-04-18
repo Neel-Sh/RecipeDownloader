@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>Recipe To‑Do</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to content</a>
+  <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+  <main id="main-content" class="container">
+    <section class="section-card form-section" role="region" aria-labelledby="header-heading">
+      <h1 id="header-heading">Recipe To‑Do</h1>
+      <p class="intro-text">Paste a recipe URL to generate your cooking checklist.</p>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          <ul class="flashes">
+          {% for cat, msg in messages %}
+            <li class="{{ cat }}">{{ msg }}</li>
+          {% endfor %}
+          </ul>
+        {% endif %}
+      {% endwith %}
+      <form method="POST">
+        <input type="url" name="url" aria-label="Recipe URL" placeholder="Paste recipe URL here" required>
+        <button type="submit">Fetch &amp; Generate</button>
+      </form>
+    </section>
+    <section class="section-card history-section" role="region" aria-labelledby="history-heading">
+      <h2 id="history-heading">Recent Recipes</h2>
+      <ul id="recent-list" class="history-list"></ul>
+      <button id="clear-history" class="action-button" type="button">Clear History</button>
+    </section>
+  </main>
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

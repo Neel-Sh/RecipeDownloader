@@ -1,0 +1,3 @@
+#!/Users/neelsharma/Desktop/Recipe Downloader/venv/bin/python3
+import readability
+readability.main()
