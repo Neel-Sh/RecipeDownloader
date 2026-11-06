@@ -1,98 +1,35 @@
-# 🍳 Recipe Downloader
+# Recipe Downloader
 
-**Recipe Downloader** is a sleek, open-source web app that turns any recipe URL into an interactive cooking checklist. Built with Flask and modern JavaScript, it helps you cook with confidence — track your progress, scale your ingredients, and even listen to step-by-step voice instructions.
+A local Flask app that extracts ingredients and instructions from recipe pages and presents an interactive cooking checklist. The browser provides progress tracking, serving adjustments, theme controls, and speech synthesis.
 
----
+## Run locally
 
-## ✨ Features
+Use Python 3.11 and a fresh virtual environment:
 
-- 🔗 Paste a recipe URL and extract ingredients + instructions
-- ✅ Interactive checkboxes to track your cooking progress
-- 🔊 Built-in voice assistant (Text-to-Speech) for steps
-- 🎚️ Adjust ingredient amounts based on servings
-- 💾 Local progress saved via browser memory
-- 🌓 Light & Dark Mode toggle
-- 🔒 No login required — runs fully in-browser
-
----
-
-## 📦 Getting Started
-
-### 1. Clone the repository
-
-```bash
+```sh
 git clone https://github.com/Neel-Sh/RecipeDownloader.git
 cd RecipeDownloader
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+python -m flask --app app run --host 127.0.0.1 --port 5000
 ```
 
-### 2. Create and activate a virtual environment (optional but recommended)
+Open [localhost:5000](http://localhost:5000), paste a recipe URL, and submit it. The Python server fetches the recipe page; this app does **not** run entirely in the browser.
 
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
+## Extraction and limits
 
-### 3. Install dependencies
+The parser tries recipe-scrapers, structured metadata through Extruct, JSON-LD, HTML headings/lists, and a Readability fallback. Results depend on the source website: blocked requests, changed markup, paywalls, and missing structured data can prevent extraction. Check ingredient quantities and instruction order against the original page.
 
-```bash
-pip install -r requirements.txt
-```
+Checklist state uses browser storage. Voice playback depends on the browser's speech-synthesis support. Source websites receive requests from the machine running Flask. Run this as a local tool: the URL-fetching endpoint is not designed as a public, authenticated scraping service.
 
-### 4. Run the app
+## Project layout
 
-```bash
-flask run
-```
+| Path | Purpose |
+| --- | --- |
+| `app.py` | Flask routes and recipe extraction |
+| `templates/` | Input and recipe views |
+| `static/` | Browser styles and interaction code |
+| `requirements.txt` | Direct runtime dependencies |
 
-Then open your browser to:  
-📍 `http://127.0.0.1:5000`
-
----
-
-## 🛠 Built With
-
-- **Python** + **Flask** – backend web server
-- **HTML5/CSS3 + JS** – responsive front-end
-- **SpeechSynthesis API** – voice-guided cooking
-- **LocalStorage** – remembers progress without logins
-
----
-
-## 📂 Project Structure
-
-```
-RecipeDownloader/
-├── static/
-│   ├── css/           # Stylesheets
-│   └── js/            # Client-side JS
-├── templates/         # HTML templates
-├── app.py             # Flask backend (assumed)
-├── requirements.txt   # Python dependencies
-└── README.md
-```
-
----
-
-## 🧪 Example Recipe URLs
-
-Try one of these:
-
-- https://www.allrecipes.com/recipe/229960/quick-chicken-piccata/
-- https://www.bbcgoodfood.com/recipes/perfect-pancakes-recipe
-
----
-
-## 🧑‍💻 Contributing
-
-Pull requests are welcome! Please open an issue first to discuss what you’d like to change.
-
----
-
-
-## Acknowledgements
-
-- [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/) for HTML parsing
-
----
-
- 🌐 [@neel_sh_](https://twitter.com/neel_sh_)
+Virtual environments and Python bytecode are generated locally and excluded from Git. See [Contributing](CONTRIBUTING.md) for validation and bug reports. No repository-wide license file is included.
